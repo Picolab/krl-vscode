@@ -1,0 +1,3 @@
+[submodule "krl-language-server"]
+	path = krl-language-server
+	url = https://github.com/Picolab/krl-language-server
