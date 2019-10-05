@@ -1,0 +1,374 @@
+{
+	"name": "KRL (Kinetic Rule Language)",
+	"scopeName": "source.krl",
+	"fileTypes": ["krl"],
+	"uuid": "fc2e9679-a431-4503-a18c-9d4f53a72830",
+
+	"repository": {
+		"comment": {
+			"patterns": [
+				{
+					"name": "comment.line.krl",
+					"match": "\/\/.*"
+                },
+				{
+					"name": "comment.multiline.krl",
+					"begin": "\/\\*",
+					"end": "\\*\/"
+                }
+            ]
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.krl",
+					"match": "\\bruleset\\b"
+				},
+				{
+					"name": "keyword.krl",
+					"match": "\\s+\\b(_api|_rids|after|always|and|at|before|between|cachable|cacheable|callbacks|choose|clear|css|current|dataset|datasource|defaction|dispatch|domain|else|emit|every|failure|fired|finally|for|foreach|forget|from|function|global|history|if|iframe|like|mark|match|not|notfired|null|on|or|pageview|pre|raise|replace(?!\\()|rule|schedule|seen|select|set|setting|success|then|web|when|where|with|within)\\b"
+                },
+				{
+					"name": "keyword.krl",
+					"match": "\\b(count|repeat)\\b(?=\\s+[0-9]+)"
+                }
+            ]
+		},
+		"meta_block_keywords": {
+			"patterns": [
+				{
+					"name": "keyword.meta.krl",
+					"match": "\\b(authz|require|logging|sharing|use|module|version|alias|configure|using|name|author|description|key|provide|provides|shares)\\b"
+				}
+			]
+		},
+		"constants": {
+			"patterns": [
+				{
+					"name": "constant.language.krl",
+					"match": "\\b(true|false|on|off)\\b"
+                },
+				{
+					"name": "constant.language.krl",
+					"match": "\\b(ent:|app:|engine:)\\b"
+                },
+				{
+					"name": "constant.language.library.krl",
+					"match": "\\b(page|event|http|time|location|twitter|facebook|amazon|google|math|meta|oauthmodule|pci|random|referer|rsm|rss|this2that|twilio|uri|useragent|weather|xdi):\\b"
+                },
+				{
+					"name": "constant.language.krl",
+					"match": "\\b(year|month|week|day|hour|minute|second)s?\\b"
+                },
+				{
+					"name": "constant.language.krl",
+					"match": "\\b:(JSON|RSS|XML|HTML)\\b"
+                }
+            ]
+		},
+		"numeric_constants": {
+			"patterns": [
+				{
+					"name": "constant.numeric.krl",
+					"match": "\\b\\d+\\b"
+				},
+				{
+					"name": "constant.numeric.krl",
+					"match": "\\b\\d+\\.\\d*\\b"
+				},
+				{
+					"name": "constant.numeric.krl",
+					"match": "\\.\\d+\\b"
+				}
+			]
+		},
+		"escape_sequences": {
+			"patterns": [
+				{
+					"name": "constant.character.escape.krl",
+					"match": "\\\\(b|d|t|n|f|r|\\\"|\\'|\\\\|\\.|w|s|\\?|\\(|\\)|-)"
+				}
+			]
+		},
+		"functions": {
+			"patterns": [
+				{
+					"name": "support.function.krl",
+					"match": "\\b(all|any|as|avg|capitalize|collect|decode|delete|difference|duplicates|encode|extract|filter|has|head|index|intersection|isnull|join|keys|klog|lc|length|map|max|min|none|notall|once|pairwise|pick|push|put|query|range|reduce|reverse|slice|sort|splice|split|sprintf|substr|sum|tail|trim|typeof|uc|union|unique|values)\\b"
+				},
+				{
+					"name": "support.function.web_action.krl",
+					"match": "\\s+\\b(after|alert|annotate|append|before|close_notification|content_changed|emit|float_html|float|move_after|move_to_top|noop|notify|percolate|popup|prepend|redirect|replace|replace_html|replace_image_src|replace_inner|send_directive|set_element_attr|sidetab|watch)\\b(?=\\()"
+				},
+				{
+					"name": "support.function.page.krl",
+					"match": "\\b(?<=page:)(env|url)(?=\\()"
+				},
+				{
+					"name": "support.function.event.krl",
+					"match": "\\b(?<=event:)(env|domain|type|name|attr|attrs|channel|send|get_list|delete|get_history|param)(?=\\()"
+				},
+				{
+					"name": "support.function.http.rkl",
+					"match": "\\b(?<=http:)(post|get|put|delete|patch|head)(?=\\()"
+				},
+				{
+					"name": "support.function.time.krl",
+					"match": "\\b(?<=time:)(now|new|add|strftime|atom|compare|timezone|daytime|nighttime|morning|afternoon|evening|night|lunch_time|late_morning|early_afternoon|late_afternoon|time_between|date_between|date_start|day_of_week|today_is|weekday|weekend)(?=\\()"
+				},
+				{
+					"name": "support.function.location.krl",
+					"match": "\\b(?<=location:)(country_code|country_name|region|city|postal_code|latitude|longitude|dma_code|area_code)(?=\\()"
+				},
+				{
+					"name": "support.function.twitter.krl",
+					"match": "\\b(?<=twitter:)(authorize|authorized|update|friends_timeline|blocking|blocking_ids|favorites|followers_ids|friends_ids|friends_timeline|home_timeline|friendship_exists|mentions|public_timeline|rate_limit_status|retweeted_by_me|retweeted_of_me|retweeted_to_me|retweets|saved_searches|sent_direct_messages|show_friendship|show_saved_search|show_status|show_user|trends_available|trends_location|user_timeline|users_search|trends_daily|trends_weekly)(?=\\()"
+				},
+				{
+					"name": "support.function.facebook.krl",
+					"match": "\\b(?<=facebook:)(authorize|authorized|metadata|picture|search|get|ids)(?=\\()"
+				},
+				{
+					"name": "support.function.amazon.krl",
+					"match": "\\b(?<=amazon:)(item_search|item_lookup)(?=\\()"
+				},
+				{
+					"name": "support.function.google.krl",
+					"match": "\\b(?<=google:)(authorize|authorized|get)(?=\\()"
+				},
+				{
+					"name": "support.function.math.krl",
+					"match": "\\b(?<=math:)(random|pi|exp|int|abs|log|sqrt|power|ceiling|floor|round|deg2rad|grad2rad|rad2deg|grad2deg|deg2grad|rad2grad|md5|sha1|hmac_sha1|hmac_sha1_hex|hmac_sha1_base64|hmac_sha256|hmac_sha256_hex|hmac_sha256_base64|tan|sin|cos|cot|sec|csc|atan|asin|acos|acot|asec|acsc|tanh|sinh|cosh|coth|sech|csch|atanh|asinh|acosh|acoth|asech|acsch|great_circle_distance|great_circle_direction|great_circle_midpoint|great_circle_midpoint|great_circle_waypoint)(?=\\()"
+				},
+				{
+					"name": "support.function.meta.krl",
+					"match": "\\b(?<=meta:)(rid|version|callingRID|callingVersion|moduleRID|moduleVersion|inModule|host|rulesetName|rulesetAuthor|rulesetDescription|ruleName|eci)(?=\\()"
+				},
+				{
+					"name": "support.function.oauthmodule.krl",
+					"match": "\\b(?<=oauthmodule:)(has_token|post|put|get|head|delete|patch|get_auth_url)(?=\\()"
+				},
+				{
+					"name": "support.function.pci.krl",
+					"match": "\\b(?<=pci:)(new_cloud|delete_cloud|auth|exists|set_password|reset_password|get_username|get_email|list_children|list_parent|set_parent|new_ruleset|delete_ruleset|list_ruleset|new_eci|delete_eci|list_eci|get_eci_attributes|set_eci_attributes|get_eci_policy|set_eci_policy|session_token|create_developer_key|set_permissions|clear_permissions|get_permissions|add_callback|remove_callback|list_callback|add_bootstrap|remove_bootstrap|list_bootstrap|add_appinfo|get_appinfo|remove_appinfo|cloudnumber|set_logging|get_logging|clear_logging|get_logs)(?=\\()"
+				},
+				{
+					"name": "support.function.random.krl",
+					"match": "\\b(?<=random:)(word|quote|photo|uuid)(?=\\()"
+				},
+				{
+					"name": "support.function.referer.krl",
+					"match": "\\b(?<=referer:)(search_engine_referer|search_terms|referer_domain|remote_referer|local_referer)(?=\\()"
+				},
+				{
+					"name": "support.function.rsm.krl",
+					"match": "\\b(?<=rsm:)(entity_keys|app_keys|new_ruleset|list_rulesets|get_ruleset|is_owner|register|flush|validate|update|fork|create|delete|import|is_valid)(?=\\()"
+				},
+				{
+					"name": "support.function.rss.krl",
+					"match": "\\b(?<=rss:)(version|items|first|last|index|random|channel|item)(?=\\()"
+				},
+				{
+					"name": "support.function.this2that.krl",
+					"match": "\\b(?<=this2that:)(transform|xml2json|chr|ord|pack|unpack|string2base64|base642string|url2base64|base642url)(?=\\()"
+				},
+				{
+					"name": "support.function.twilio.krl",
+					"match": "\\b(?<=twilio:)(say|play|gather_start|gather_stop|record|send_sms|sms|dial|dial_conference|dial_start|number|dial_stop|hangup|redirect|reject|pause|raw-response)(?=\\()"
+				},
+				{
+					"name": "support.function.uri.krl",
+					"match": "\\b(?<=uri:)(escape|unescape)(?=\\()"
+				},
+				{
+					"name": "support.function.useragent.krl",
+					"match": "\\b(?<=useragent:)(language|language_code|browser_name|browser_version|browser_version_major|browse_version_minor|os|os_type|os_version)(?=\\()"
+				},
+				{
+					"name": "support.function.weather.krl",
+					"match": "\\b(?<=weather:)(curr_temp|curr_cond|curr_cond_code|tomorrow_low|tomorrow_high|tomorrow_cond|tomorrow_cond_code|warmer_than|colder_than|tomorrow_cond|today_showers|tomorrow_showers|today_cloudy|today_snow|tomorrow_snow|tomorrow_cloudy|today_windy|tomorrow_windy|today_sunny|tomorrow_sunny)(?=\\()"
+				},
+				{
+					"name": "support.function.xdi.krl",
+					"match": "\\b(?<=xdi:)(has_account|create_new_graph|flush_xdi|iname|inumber|lookup|global_definitions|local_definitions|add|get|mod|del|tuple|tuples|properties|equivalents|all_literals|literal|set_link_contract)(?=\\()"
+				}
+			]
+		},
+		"operators": {
+			"patterns": [
+				{
+					"name": "keyword.operator.krl",
+					"match": "\\b(eq|neq|cmp)\\b"
+				}
+			]
+		},
+		"string": {
+			"patterns": [
+				{
+					"name": "string.quoted.single.krl",
+					"begin": "'",
+					"patterns": [
+						{
+							"include": "#escape_sequences"
+						}
+					],
+					"end": "'"
+				},
+				{
+					"name": "string.quoted.double.krl",
+					"begin": "\"",
+					"patterns": [
+						{
+							"include": "#escape_sequences"
+						}
+					],
+					"end": "\""
+				}
+			]
+		},
+		"regex": {
+			"patterns": [
+				{
+					"name": "string.regexp.krl",
+					"match": "\\bre\/.*\/[gim]{0,3}"
+				},
+				{
+					"name": "string.regexp.krl",
+					"match": "\\bre#.*#[gim]{0,3}"
+				}
+			]
+		},
+		"html": {
+			"patterns": [
+				{
+					"name": "html.krl",
+					"begin": "<<",
+					"patterns": [
+						{
+							"include": "text.html.basic"
+						},
+						{
+							"name": "string.beesting.krl",
+							"match": "#{[^{^}]*}"
+						}
+					],
+					"end": ">>"
+				}
+			]
+		},
+		"js": {
+			"patterns": [
+				{
+					"name": "source.js",
+					"begin": "<\\|",
+					"patterns": [
+						{
+							"include": "source.js"
+						}
+					],
+					"end": "\\|>"
+				}
+			]
+		},
+		"xdi": {
+			"patterns": [
+				{
+					"name": "source.xdi",
+					"begin": "<\\[",
+					"end": "\\]>"
+				}
+			]
+		},
+		"global_krl_patterns": {
+			"patterns": [
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#keywords"
+				},
+				{
+					"include": "#constants"
+				},
+				{
+					"include": "#numeric_constants"
+				},
+				{
+					"include": "#functions"
+				},
+				{
+					"include": "#operators"
+				},
+				{
+					"include": "#string"
+				},
+				{
+					"include": "#escape_sequences"
+				},
+				{
+					"include": "#regex"
+				},
+				{
+					"include": "#html"
+				},
+				{
+					"include": "#js"
+				},
+				{
+					"include": "#xdi"
+				}
+			]
+		},
+		"key_value_pair": {
+			"patterns": [
+				{
+					"name": "meta.key-value.krl",
+					"begin": "\\{",
+					"patterns": [
+						{
+							"include": "#string"
+						},
+						{
+							"include": "#numeric_constants"
+						}
+					],
+					"end": "\\}"
+				}
+			]
+		},
+		"meta_block": {
+			"patterns": [
+				{
+					"name": "block.meta.krl",
+					"begin": "\\b(meta)\\b\\s*\\{",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.krl"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#global_krl_patterns"
+						},
+						{
+							"include": "#meta_block_keywords"
+						},
+						{
+							"include": "#key_value_pair"
+						}
+					],
+					"end": "\\}"
+				}
+			]
+		}
+	},
+
+	"patterns": [
+		{
+			"include": "#global_krl_patterns"
+		},
+		{
+			"include": "#meta_block"
+		}
+    ]
+}

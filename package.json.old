@@ -1,0 +1,17 @@
+{
+  "name": "krl-language-server",
+  "version": "0.0.1",
+  "description": "A language server for manipulating KRL rulesets.",
+  "main": "index.js",
+  "author": "Picolab",
+  "license": "ISC",
+  "repository": {
+    "type": "git"
+  },
+  "engines":{
+    "node":"*"
+  },
+  "dependencies": {
+    "vscode-languageserver":"^5.2.1"
+  }
+}
