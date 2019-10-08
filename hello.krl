@@ -1,1 +1,5 @@
-AA BBB javascript JavaScript TypeScript JavaScript 
+ruleset h {
+  global {
+      
+  }
+}
