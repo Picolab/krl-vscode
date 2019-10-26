@@ -1,5 +1,0 @@
-ruleset h {
-  global {
-      
-  }
-}
