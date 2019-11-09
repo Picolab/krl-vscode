@@ -4,7 +4,7 @@
  * ------------------------------------------------------------------------------------------ */
 
 import * as path from 'path';
-import { workspace, ExtensionContext } from 'vscode';
+import { workspace, ExtensionContext, commands , window, TextDocument, InputBoxOptions} from 'vscode';
 
 import {
 	LanguageClient,
@@ -12,10 +12,63 @@ import {
 	ServerOptions,
 	TransportKind
 } from 'vscode-languageclient';
+import { Url } from 'url';
+import * as request from 'request-promise-native';
 
 let client: LanguageClient;
 
+async function registerRuleset(URL : Url) {
+	let currentDocument : TextDocument = window.activeTextEditor.document
+	if (currentDocument.isDirty) {
+		window.showWarningMessage('You haven\'t saved! Save before registering.')
+		return
+	}
+	// if (window.activeTextEditor)
+	let ruleset : string = currentDocument.getText()
+
+	const queryString : string = '/api/ruleset/register'
+	let options = {
+		uri: 'http://' + URL.host + queryString,
+		body: {
+			"src":ruleset
+		},
+		json: true
+	}
+	request(options).then(function(resultBody) {
+		window.showInformationMessage('Ruleset ' + resultBody.rid + ' Registered at ' + URL.host)
+	}).catch(function (err){
+		if (err.message) {
+			window.showErrorMessage('Unable to register ruleset to pico engine at ' + URL.host + ' got error ' + err.message)
+		} else {
+			window.showErrorMessage('Unable to register ruleset to engine at ' + URL.host)
+		}
+	})
+}
+
 export function activate(context: ExtensionContext) {
+
+	// Local Extension Functionality Setup
+	const registerRulesetCmd : string = 'krlkLangSupport.registerRuleset'
+	const registerRulesetPromptCmd : string = 'krlLangSupport.registerRulesetPrompt'
+
+	const registerRulesetHandler = () => {
+		registerRuleset(new URL('http://localhost:8080'))
+	}
+
+	const registerRulesetPromptHandler = () => {
+		let options : InputBoxOptions = {
+			"prompt":"Enter a reachable pico engine host"
+		}
+		window.showInputBox(options).then(function(url? : string) {
+			if (url) {
+				registerRuleset(new URL(url))
+			}
+		})
+	}
+	context.subscriptions.push(commands.registerCommand(registerRulesetCmd, registerRulesetHandler))
+	context.subscriptions.push(commands.registerCommand(registerRulesetPromptCmd, registerRulesetPromptHandler))
+	
+	// Language Server Setup
 	// The server is implemented in node
 	let serverModule = context.asAbsolutePath(
 		path.join('krl-language-server', 'out', 'server.js')
@@ -47,8 +100,8 @@ export function activate(context: ExtensionContext) {
 
 	// Create the language client and start the client.
 	client = new LanguageClient(
-		'languageServerExample',
-		'Language Server Example',
+		'krlLangServer',
+		'KRL Language Server',
 		serverOptions,
 		clientOptions
 	);
