@@ -17,6 +17,8 @@
 		"postinstall": "vscode-install"
 	},
 	"dependencies": {
+		"request": "^2.88.0",
+		"request-promise-native": "^1.0.8",
 		"vscode-languageclient": "^4.1.4"
 	},
 	"devDependencies": {
