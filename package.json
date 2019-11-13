@@ -57,7 +57,7 @@
 					"description": "Traces the communication between VS Code and the language server."
 				},
 				"krlLanguageSupport.picoEngine.defaultHost": {
-					"scope": "window",
+					"scope": "application",
 					"type": "string",
 					"default": "localhost:8080",
 					"description": "The default host of the pico engine to sync KRL rulesets with"

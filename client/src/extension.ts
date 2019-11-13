@@ -23,7 +23,6 @@ async function registerRuleset(URL : Url) {
 		window.showWarningMessage('You haven\'t saved! Save before registering.')
 		return
 	}
-	// if (window.activeTextEditor)
 	let ruleset : string = currentDocument.getText()
 
 	const queryString : string = '/api/ruleset/register'
@@ -45,6 +44,8 @@ async function registerRuleset(URL : Url) {
 	})
 }
 
+
+
 export function activate(context: ExtensionContext) {
 
 	// Local Extension Functionality Setup
@@ -52,16 +53,21 @@ export function activate(context: ExtensionContext) {
 	const registerRulesetPromptCmd : string = 'krlLangSupport.registerRulesetPrompt'
 
 	const registerRulesetHandler = () => {
-		registerRuleset(new URL('http://localhost:8080'))
+		let defaultHost : string = workspace.getConfiguration('krlLanguageSupport.picoEngine') .get('defaultHost', 'localhost:8080') 
+		registerRuleset(new URL('http://' + defaultHost))
 	}
 
+	let lastUsedHost : string | undefined = undefined
 	const registerRulesetPromptHandler = () => {
 		let options : InputBoxOptions = {
-			"prompt":"Enter a reachable pico engine host"
+			'prompt':'Enter a reachable pico engine host',
+			'placeHolder':'http://localhost:8080',
+			'value': lastUsedHost || ''
 		}
 		window.showInputBox(options).then(function(url? : string) {
 			if (url) {
 				registerRuleset(new URL(url))
+				lastUsedHost = url
 			}
 		})
 	}
@@ -92,10 +98,10 @@ export function activate(context: ExtensionContext) {
 	let clientOptions: LanguageClientOptions = {
 		// Register the server for plain text documents
 		documentSelector: [{ scheme: 'file', language: 'krl' }],
-		synchronize: {
-			// Notify the server about file changes to '.clientrc files contained in the workspace
-			fileEvents: workspace.createFileSystemWatcher('**/.clientrc')
-		}
+		// synchronize: {
+		// 	// Notify the server about file changes to '.clientrc files contained in the workspace
+		// 	fileEvents: workspace.createFileSystemWatcher('**/.clientrc')
+		// }
 	};
 
 	// Create the language client and start the client.
