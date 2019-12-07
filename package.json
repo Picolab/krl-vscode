@@ -64,7 +64,7 @@
 				}
 			}
 		},
-		"commands":[
+		"commands": [
 			{
 				"command": "krlkLangSupport.registerRuleset",
 				"title": "KRL: Register Ruleset to Pico Engine at Default Host"
@@ -75,7 +75,7 @@
 			}
 		],
 		"menus": {
-      		"commandPalette": [
+			"commandPalette": [
 				{
 					"command": "krlkLangSupport.registerRuleset",
 					"when": "editorLangId == KRL"
@@ -84,9 +84,9 @@
 					"command": "krlLangSupport.registerRulesetPrompt",
 					"when": "editorLangId == KRL"
 				}
-      		]
+			]
 		},
-		"keybindings":[
+		"keybindings": [
 			{
 				"command": "krlkLangSupport.registerRuleset",
 				"key": "ctrl+alt+p",
@@ -103,10 +103,10 @@
 		"test": "sh ./scripts/e2e.sh"
 	},
 	"devDependencies": {
-		"@types/mocha": "^5.2.0",
-		"@types/node": "^8.0.0",
-		"tslint": "^5.16.0",
-		"typescript": "^3.5.1"
+		"@types/mocha": "^5.2.7",
+		"@types/node": "^8.10.59",
+		"tslint": "^5.20.1",
+		"typescript": "^3.7.2"
 	},
 	"dependencies": {
 		"line-column": "^1.0.2"
