@@ -8,6 +8,11 @@ This extension provides basic KRL support to vS code including:
 * Syntax Highlighting
 * Diagnostics (Linter)
 
+## Pico Engine Ruleset Registration
+
+The extension allows for the user to publish any KRL file being edited to a pico engine endpoint.
+The command can be found under the command palette or CTRL + ALT + P will publish to a default engine, set in the extension settings.
+
 ## Structure
 
 
