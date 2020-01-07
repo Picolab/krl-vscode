@@ -2,6 +2,7 @@
 	"name": "krl-vs-code",
 	"description": "A language client for KRL on VS Code that relies on krl-language-server",
 	"author": "Picolab",
+	"publisher": "picolabs",
 	"license": "MIT",
 	"version": "1.0.0",
 	"repository": {
@@ -12,7 +13,7 @@
 		"multi-root ready"
 	],
 	"engines": {
-		"vscode": "^1.23.0"
+		"vscode": "^1.26.0"
 	},
 	"activationEvents": [
 		"onLanguage:plaintext"
@@ -106,7 +107,7 @@
 		"@types/mocha": "^5.2.7",
 		"@types/node": "^8.10.59",
 		"tslint": "^5.20.1",
-		"typescript": "^3.7.2"
+		"typescript": "^3.7.3"
 	},
 	"dependencies": {
 		"line-column": "^1.0.2"

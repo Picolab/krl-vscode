@@ -12,8 +12,8 @@ import {
 	ServerOptions,
 	TransportKind
 } from 'vscode-languageclient';
-import { Url } from 'url';
-import * as request from 'request-promise-native';
+import { Url, parse } from 'url';
+import requestPromise = require('request-promise-native');
 
 let client: LanguageClient;
 
@@ -33,7 +33,7 @@ async function registerRuleset(URL : Url) {
 		},
 		json: true
 	}
-	request(options).then(function(resultBody) {
+	requestPromise(options).then(function(resultBody) {
 		window.showInformationMessage('Ruleset ' + resultBody.rid + ' Registered at ' + URL.host)
 	}).catch(function (err){
 		if (err.message) {
@@ -47,14 +47,15 @@ async function registerRuleset(URL : Url) {
 
 
 export function activate(context: ExtensionContext) {
-
+	console.log("KRL Extension Activated")
+	console.log(context.extensionPath)
 	// Local Extension Functionality Setup
 	const registerRulesetCmd : string = 'krlkLangSupport.registerRuleset'
 	const registerRulesetPromptCmd : string = 'krlLangSupport.registerRulesetPrompt'
 
 	const registerRulesetHandler = () => {
 		let defaultHost : string = workspace.getConfiguration('krlLanguageSupport.picoEngine') .get('defaultHost', 'localhost:8080') 
-		registerRuleset(new URL('http://' + defaultHost))
+		registerRuleset(parse('http://' + defaultHost))
 	}
 
 	let lastUsedHost : string | undefined = undefined
@@ -66,7 +67,7 @@ export function activate(context: ExtensionContext) {
 		}
 		window.showInputBox(options).then(function(url? : string) {
 			if (url) {
-				registerRuleset(new URL(url))
+				registerRuleset(parse(url))
 				lastUsedHost = url
 			}
 		})
