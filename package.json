@@ -3,9 +3,9 @@
 	"description": "A language client for KRL on VS Code that relies on krl-language-server",
 	"author": "Picolab",
 	"publisher": "picolabs",
-	"icon": "icon.png",
+	"icon": "logo.png",
 	"license": "MIT",
-	"version": "1.0.0",
+	"version": "1.1.1",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/Picolab/krl-vscode"
@@ -18,7 +18,7 @@
 		"vscode": "^1.26.0"
 	},
 	"activationEvents": [
-		"onLanguage:plaintext"
+		"onLanguage:KRL"
 	],
 	"main": "./client/out/extension",
 	"contributes": {
